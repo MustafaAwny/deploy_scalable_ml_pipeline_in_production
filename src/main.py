@@ -6,9 +6,79 @@ from joblib import load
 
 import pandas as pd
 import numpy as np
-from model import train_model, compute_model_metrics, inference
+#from model import train_model, compute_model_metrics, inference
 #from data import clean_data
 import os
+
+
+from sklearn.metrics import fbeta_score, precision_score, recall_score
+import logging
+from sklearn.ensemble import RandomForestClassifier
+
+# Optional: implement hyperparameter tuning.
+def train_model(X_train, y_train):
+    """
+    Trains a machine learning model and returns it.
+
+    Inputs
+    ------
+    X_train : np.array
+        Training data.
+    y_train : np.array
+        Labels.
+    Returns
+    -------
+    model
+        Trained machine learning model.
+    """
+    try:
+        model = RandomForestClassifier()
+        model.fit(X_train, y_train)
+        logging.info('Model trained successfully')
+        return model
+    except BaseException:
+        logging.info('Model training or saving failed')
+
+
+def compute_model_metrics(y, preds):
+    """
+    Validates the trained machine learning model using precision, recall, and F1.
+
+    Inputs
+    ------
+    y : np.array
+        Known labels, binarized.
+    preds : np.array
+        Predicted labels, binarized.
+    Returns
+    -------
+    precision : float
+    recall : float
+    fbeta : float
+    """
+    fbeta = fbeta_score(y, preds, beta=1, zero_division=1)
+    precision = precision_score(y, preds, zero_division=1)
+    recall = recall_score(y, preds, zero_division=1)
+    return precision, recall, fbeta
+
+
+def inference(model, X):
+    """ Run model inferences and return the predictions.
+
+    Inputs
+    ------
+    model : ???
+        Trained machine learning model.
+    X : np.array
+        Data used for prediction.
+    Returns
+    -------
+    preds : np.array
+        Predictions from the model.
+    """
+    preds = model.predict(X)
+    return preds
+
 
 if "DYNO" in os.environ and os.path.isdir(".dvc"):
     os.system("dvc config core.no_scm true")
