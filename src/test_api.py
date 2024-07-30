@@ -4,6 +4,24 @@ import pandas as pd
 import numpy as np
 from sklearn.preprocessing import LabelBinarizer, OneHotEncoder
 
+# Put the code for your API here.
+from typing import Literal
+from fastapi import FastAPI
+from pydantic import BaseModel
+from joblib import load
+
+import pandas as pd
+import numpy as np
+#from model import train_model, compute_model_metrics, inference
+#from data import clean_data
+import os
+
+
+from sklearn.metrics import fbeta_score, precision_score, recall_score
+import logging
+from sklearn.ensemble import RandomForestClassifier
+
+
 
 def process_data(
     X, categorical_features=[], label=None, training=True, encoder=None, lb=None
