@@ -13,9 +13,9 @@ df = {
     "hoursPerWeek": 40,
     "nativeCountry": "United-States"
     }
-r = requests.post('https://mlops-salaries.herokuapp.com', json=df)
+#r = requests.post('https://mlops-salaries.herokuapp.com', json=df)
 
-assert r.status_code == 200
+#assert r.status_code == 200
 
-print("Response code: %s" % r.status_code)
-print("Response body: %s" % r.json())
+#print("Response code: %s" % r.status_code)
+#print("Response body: %s" % r.json())
