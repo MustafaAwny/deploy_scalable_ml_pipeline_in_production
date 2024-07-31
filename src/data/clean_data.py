@@ -22,9 +22,8 @@ def cleaned_data(df):
         return df
     
     except BaseException:
-        logging.info('Data is not cleaned properly')
+        logging.info('Data is not cleaned')
 
 
-if __name__ == '__main__':
-    df = load_data('census.csv')
-    cleaned_data(df)
+df = load_data('census.csv')
+cleaned_data(df)
