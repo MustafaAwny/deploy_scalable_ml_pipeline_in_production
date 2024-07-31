@@ -213,9 +213,9 @@ async def get_items():
 
 @app.post("/")
 async def inferences(user_data: User):
-    model = load("model/model.joblib")
-    encoder = load("model/encoder.joblib")
-    lb = load("model/lb.joblib")
+    model = load("model.joblib")
+    encoder = load("encoder.joblib")
+    lb = load("lb.joblib")
 
     array = np.array([[
                      user_data.age,
